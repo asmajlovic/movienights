@@ -48,4 +48,4 @@ def logout():
 app.secret_key = 'This_is_a_very_secure_key!'
 
 if __name__ == '__main__':
-    app.run(port=1337, debug=True)
+    app.run(port=1337, debug=False)
