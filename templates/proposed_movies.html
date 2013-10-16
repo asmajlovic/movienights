@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+
+{% block content %}
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <tr>
+                <th>Date</th>
+                <th>Movie 1</th>
+                <th>Movie 2</th>
+                <th>Movie 3</th>
+                <th>Movie 4</th>
+                <th>Movie 5</th>
+            </tr>
+            {% for event in proposed_movies|dictsort %}
+            <tr>
+                <td>{{ event[0] }}</a></td>
+                {% for title in event[1] %}
+                <td>{% if title %}{{ title }}{% endif %}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tabe>
+{% endblock %}
