@@ -10,11 +10,17 @@
                 <th>Movie 4</th>
                 <th>Movie 5</th>
             </tr>
-            {% for event in proposed_movies|dictsort %}
+            {% for event in history|dictsort %}
             <tr>
-                <td>{{ event[0] }}</a></td>
-                {% for title in event[1] %}
-                <td>{% if title %}{{ title }}{% endif %}</td>
+                <td style="width: 100px"><b>{{ event[0] }}</b></td>
+                {% for title in event[1][0] %}
+                    {% if title -%}
+                    {% if title == event[1][1] -%}
+                    <td style="background: #C5E3BF">{{ title }}</td>
+                    {% else %}
+                    <td>{{ title }}</td>
+                    {% endif %}
+                    {% endif %}
                 {% endfor %}
             </tr>
             {% endfor %}
