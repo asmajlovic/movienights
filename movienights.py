@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, session, url_for, redirect
 from common.db import Db
 import hashlib
 
-modules = 'home', 'rules', 'movielist', 'history'
+modules = 'home', 'rules', 'movielist', 'history', 'score'
 
 app = Flask('movienights')
 app.db = Db('db/movienights.db')

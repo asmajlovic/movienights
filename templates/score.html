@@ -1,0 +1,23 @@
+{% extends "template.html" %}
+
+{% block content %}
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <tr>
+                <th>User</th>
+                <th style="width: 15px">Score</th>
+            </tr>
+            {% for user in score %}
+            <tr>
+                <td style="width: 15px">{{ user[0]|capitalize }}</td>
+                <td style="background:
+                {% if user[1] <= 1 %}#FF6633
+                {% elif user[1] == 2 %}#F5B800
+                {% elif user[1] == 3 %}#CCFF33
+                {% elif user[1] == 4 %}#33FF66
+                {% else %}#66FF33
+                {% endif %}
+                ">{{ user[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tabe>
+{% endblock %}
