@@ -1,33 +1,40 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import argparse
 import random
-import sys
 from collections import Counter
 
-candidates = ['Adnan', 'Andrew', 'Daniele', 'Marius', 'Sushil', 'Matteo', 'Duncan']
+def main():
+    """
+    Run through a string list of candidates and pseudo-randomly increase
+    the relevant vote count.  Highest count for any given list element
+    is the elected candidate
+    """
+    parser = argparse.ArgumentParser(description="Elect a new movie night "
+                                                    "president")
+    parser.add_argument("-t", "--votes", action="store", required=False,
+                        metavar="VOTES_AVAILABLE", type=int,
+                        help="Total number of votes to cast",
+                        default=1000000)
+    parser.add_argument("-c", "--candidates", action="store", required=True,
+                        metavar="CANDIDATE_LIST", nargs="+", type=str,
+                        help="List of candidates to be considered")
 
-def help():
-    print """Usage: elect.py <former president #1> <former president #2>
+    # Parse arguments (validate user input)
+    args = parser.parse_args()
 
-Available candidates: {0}""".format(", ".join(candidates))
+    results = Counter()
+    for vote in xrange(args.votes):
+        random.shuffle(args.candidates)
+        results.update([args.candidates[0]])
 
-try:
-    candidates.remove(sys.argv[1])
-    candidates.remove(sys.argv[2])
-except ValueError:
-    print "The two former incarnation of El Presidente must be valid candidates\n"
-    help()
-    sys.exit(1)
-except IndexError:
-    print "Please specify the two last incarnations of El Presidente\n"
-    help()
-    sys.exit(1)
+    d = dict(results.items())
+    el_presidente = sorted(d, key=d.get)[-1]
+    print "The new El Presidente is {0}. Congratulations!".format(el_presidente)
 
 
-results = Counter()
-for vote in xrange(1000000):
-   random.shuffle(candidates)
-   results.update([candidates[0]])
+# Run the damn thing...
+if __name__ == '__main__':
+    main()    
 
-d = dict(results.items())
-el_presidente = sorted(d, key=d.get)[-1]
-print "The new El Presidente is {0}. Congratulations!".format(el_presidente)
