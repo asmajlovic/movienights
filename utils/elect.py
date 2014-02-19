@@ -13,12 +13,11 @@ def main():
     """
     parser = argparse.ArgumentParser(description="Elect a new movie night "
                                                     "president")
-    parser.add_argument("-t", "--votes", action="store", required=False,
-                        metavar="VOTES_AVAILABLE", type=int,
-                        help="Total number of votes to cast",
+    parser.add_argument("-t", "--votes", action="store", metavar="VOTES",
+                        type=int, help="Total number of votes to cast",
                         default=1000000)
-    parser.add_argument("-c", "--candidates", action="store", required=True,
-                        metavar="CANDIDATE_LIST", nargs="+", type=str,
+    parser.add_argument("candidates", action="store", metavar="CANDIDATE",
+                        nargs="+", type=str,
                         help="List of candidates to be considered")
 
     # Parse arguments (validate user input)
